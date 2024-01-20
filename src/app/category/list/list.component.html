@@ -1,0 +1,45 @@
+<ng-template #content let-offcanvas>
+	<div class="offcanvas-header">
+		<h4 class="offcanvas-title">Detalles de la categoria</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+	</div>
+	<div class="offcanvas-body">
+        <ng-container *ngIf="categorySelected">
+            <input id="table-complete-search" type="text" class="form-control my-5" value="{{categorySelected.name}}"/>
+            <input id="table-complete-search" type="text" class="form-control" value="{{categorySelected.description}}"/>
+        </ng-container>
+		<div class="text-end m-4">
+			<button type="button" class="btn btn-outline-white text-white bg-success mx-4" (click)="offcanvas.close('Close click')">Guardar</button>
+			<button type="button" class="btn btn-outline-white text-white bg-danger" (click)="offcanvas.close('Close click')">Cancelar</button>
+		</div>
+	</div>
+</ng-template>
+
+<div class="container">
+    <div>
+        <h2 class="">Categorias</h2>
+    </div>
+    <form>
+        <div class="mb-3 row">
+            <label for="table-complete-search" class="col-xs-3 col-sm-auto col-form-label">Buscar categoria por nombre:</label>
+            <div class="col-lg-6 col-md-auto">
+                <input id="table-complete-search" type="text" class="form-control" placeholder="Ingrese el nombre"/>
+            </div>
+        </div>
+    
+        <ng-container *ngIf="categories$ | async as categories">
+            <ng-container *ngFor="let category of categories">
+                <a (click)="openEnd(content, category.key)">
+                    <div class="card my-3 bg-warning">
+                        <div class="card-body">
+                            <h5 class="card-title text-white">{{category.name}}</h5>
+                            <div class="card-text">
+                                <p>{{category.description}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </ng-container>
+        </ng-container>
+    </form>
+</div>

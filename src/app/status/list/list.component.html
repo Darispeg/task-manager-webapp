@@ -1,0 +1,41 @@
+<ng-template #content let-offcanvas>
+	<div class="offcanvas-header">
+		<h4 class="offcanvas-title">Detalles del Estado</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="offcanvas.dismiss('Cross click')"></button>
+	</div>
+	<div class="offcanvas-body">
+        <ng-container *ngIf="statusSelected">
+            <input id="table-complete-search" type="text" class="form-control" value="{{statusSelected.name}}"/>
+        </ng-container>
+		<div class="text-end m-4">
+			<button type="button" class="btn btn-outline-white text-white bg-success mx-4" (click)="offcanvas.close('Close click')">Guardar</button>
+			<button type="button" class="btn btn-outline-white text-white bg-danger" (click)="offcanvas.close('Close click')">Cancelar</button>
+		</div>
+	</div>
+</ng-template>
+
+<div class="container">
+    <div>
+        <h2 class="">Estados</h2>
+    </div>
+    <form>
+        <div class="mb-3 row">
+            <label for="table-complete-search" class="col-xs-3 col-sm-auto col-form-label">Buscar estado por nombre:</label>
+            <div class="col-lg-6 col-md-auto">
+                <input id="table-complete-search" type="text" class="form-control" placeholder="Ingrese el nombre"/>
+            </div>
+        </div>
+    
+        <ng-container *ngIf="status$ | async as statusList">
+            <ng-container *ngFor="let status of statusList">
+                <a (click)="openEnd(content, status.key)">
+                    <div class="card my-4 bg-info">
+                        <div class="card-body">
+                            <h5 class="card-title text-white">{{status.name}}</h5>
+                        </div>
+                      </div>
+                </a>
+            </ng-container>
+        </ng-container>
+    </form>
+</div>
