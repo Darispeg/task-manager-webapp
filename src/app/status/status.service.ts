@@ -46,7 +46,7 @@ export class StatusService
             switchMap((status) => {
                 if ( !status )
                 {
-                    return throwError(`No se pudo encontrar al usuario con la clave ${key}!`);
+                    return throwError(`No se pudo encontrar el estado con la clave ${key}!`);
                 }
                 return of(status);
             })
